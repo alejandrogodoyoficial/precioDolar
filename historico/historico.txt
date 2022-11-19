@@ -1,0 +1,2 @@
+AAAA-MM-AA,HH:MM,Precio Compra,Precio Venta
+2022/11/18 21:08 "161,2500"    "169,2500"
