@@ -1,0 +1,95 @@
+<meta http-equiv="Context-Type" content="text/html; charset=UTF-8">
+<html>
+<head>
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<style>
+		h1 {
+			font-weight: bold;
+			color: black;
+			font-size: 75px;
+		}
+
+		h2 {
+			font-weight: bold;
+			color: black;
+			font-size: 50px;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<h2>Compra/Venta de dolares</h2></div>
+			</div>
+		</div>
+	</nav>
+	<div class="container-fluid text-center">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="center-block"><h2>Compra</h2></span></div>
+			</div>
+			<div class="col-md-6">
+				<div class="center-block"><h2>Venta</h2></span></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div id="alerta-compra" class="center-block alert alert-info"><h1 class="glyphicon " id="compra-usd">N/A</h1></span></div>
+			</div>
+			<div class="col-md-6">
+				<div id="alerta-venta" class="center-block alert alert-info"><h1 class="glyphicon " id="venta-usd">N/A</h1></span></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4"><div class="alert alert-info" role="alert">Ultima act: <span id="fecha-actualizacion"></span></div></div>
+		</div>
+	</div>
+	<script>
+		const TIMEOUT = 100000;
+		$(document).ready(function() {
+			var tid = setTimeout(buscarCotizacion, 1);
+			function buscarCotizacion() {
+				$.get("http://127.0.0.1:5000/usd", function( data ) {
+					if (data.venta < $("#venta-usd").text()) {
+						$("#alerta-venta").removeClass("alert-info alert-success alert-danger");
+						$("#venta-usd").removeClass("glyphicon-triangle-top glyphicon-triangle-bottom glyphicon-minus");
+						$("#venta-usd").addClass("glyphicon-triangle-bottom");
+						$("#alerta-venta").addClass("alert-danger");
+					} else if (data.venta > $("#venta-usd").text()) {
+						$("#alerta-venta").removeClass("alert-info alert-success alert-danger");
+						$("#venta-usd").removeClass("glyphicon-triangle-top glyphicon-triangle-bottom glyphicon-minus");
+						$("#venta-usd").addClass("glyphicon-triangle-top");
+						$("#alerta-venta").addClass("alert-success");
+					}
+					if (data.compra < $("#compra-usd").text()) {
+						$("#alerta-compra").removeClass("alert-info alert-success alert-danger");
+						$("#compra-usd").removeClass("glyphicon-triangle-top glyphicon-triangle-bottom glyphicon-minus");
+						$("#compra-usd").addClass("glyphicon-triangle-bottom");
+						$("#alerta-compra").addClass("alert-danger");
+					} else if (data.compra > $("#compra-usd").text()) {
+						$("#alerta-compra").removeClass("alert-info alert-success alert-danger");
+						$("#compra-usd").removeClass("glyphicon-triangle-top glyphicon-triangle-bottom glyphicon-minus");
+						$("#compra-usd").addClass("glyphicon-triangle-top");
+						$("#alerta-compra").addClass("alert-success");
+					}
+					$("#venta-usd").text(data.venta);
+					$("#compra-usd").text(data.compra);
+					$("#fecha-actualizacion").text(new Date());
+				}); 
+  				tid = setTimeout(buscarCotizacion, TIMEOUT); // repeat myself
+  			}
+  		});
+  	</script>
+  </body>
+  </html>
+
+
+
