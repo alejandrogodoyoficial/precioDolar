@@ -5,5 +5,4 @@ echo $ruta
 sed -i "s/\/script.sh/$ruta&/g" servicio.service
 sed -i "s/-!/\//g" servicio.service
 
-cp servicio.service script.sh ../.
-#cp servicio.service tempo.timer /etc/systemd/system
+cp servicio.service tempo.timer /etc/systemd/system
