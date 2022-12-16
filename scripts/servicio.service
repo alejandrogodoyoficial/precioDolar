@@ -1,0 +1,11 @@
+[Unit]
+Description=LLama a un script que actualiza un archivo
+Wants=tempo.timer
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash "var"
+
+[Install]
+WantedBy=multi-user.target

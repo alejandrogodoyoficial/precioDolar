@@ -1,0 +1,10 @@
+[Unit]
+Description=Temporizador para servicio.service
+Requires=servicio.service
+
+[Timer]
+Unit=servicio.service
+OnCalendar=Mon..Fri,*_*_*_10..15:00,30:00
+
+[Install]
+WantedBy=timers.target
