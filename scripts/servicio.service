@@ -5,7 +5,7 @@ Wants=tempo.timer
 [Service]
 Type=simple
 User=root
-ExecStart=/bin/bash var
+ExecStart= /home/alejandro/entornoDeProgramacion/precioDolar/scriptsscript.sh
 
 [Install]
 WantedBy=multi-user.target

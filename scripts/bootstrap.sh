@@ -24,8 +24,7 @@ while [ "$option" != "4" ]; do
     "1")
 	ruta=$(pwd | sed "s/\//-!/g")
 
-	echo $ruta
-	sed -i "s/var/$ruta&/g" servicio.service
+	sed -i "s/script.sh/$ruta&/g" servicio.service
 	sed -i "s/-!/\//g" servicio.service
 
 	sudo cp servicio.service /etc/systemd/system
@@ -39,7 +38,9 @@ while [ "$option" != "4" ]; do
 	sudo rm /etc/systemd/systemo/tempo.timer
 ;;
     "3")
-	./script.sh
+	sudo docker-compose up -d
+	../cotizacion-bna/cotizacion_api.py &
+	./script.sh &
 ;;
     *)
       # Opción inválida
