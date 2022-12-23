@@ -5,7 +5,7 @@ Wants=servicio.timer
 [Service]
 Type=simple
 User=root
-ExecStart= /bin/bash -c "touch /home/alejandro/entornoDeProgramacion/precioDolar/scripts/historico/sync.txt"
+ExecStart= /bin/bash -c "touch var/historico/sync.txt"
 
 [Install]
 WantedBy=multi-user.target

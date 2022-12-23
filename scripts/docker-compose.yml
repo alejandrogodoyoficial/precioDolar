@@ -3,6 +3,9 @@ version: '2.2'
 services:
   python:
     build: ../cotizacion-bna
+    ports:
+      - 5000:5000
   ubuntu:
     build: .
-
+    volumes:
+      - ./historico/:/script/historico

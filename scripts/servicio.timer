@@ -4,7 +4,7 @@ Requires=servicio.service
 
 [Timer]
 Unit=servicio.service
-OnCalendar=*-*-* *:*:00
+OnCalendar=Mon..Fri *-*-* 10..15:00,30:00
 
 [Install]
 WantedBy=timers.target

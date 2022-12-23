@@ -1,3 +1,3 @@
 #!/bin/bash
-touch sync.txt
+touch ./historico/sync.txt
 

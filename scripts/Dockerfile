@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 WORKDIR script
-RUN [sudo apt-get update, sudo apt-get install jq, sudo apt install curl]
+RUN  apt-get update &&  apt-get install -y jq curl
 COPY . .
 CMD ["bash", "script.sh"]
 
